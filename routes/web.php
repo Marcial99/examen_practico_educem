@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\NotasController;
+use App\Http\Controllers\TipoUsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +27,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::resource('/tipo_usuario', TipoUsuarioController::class);
+    Route::resource('/notas', NotasController::class);
 });
