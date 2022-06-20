@@ -14,4 +14,14 @@ class comentario extends Model
         'comentario',
         'fecha'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'id_user');
+    }
+
+    public function respuestas()
+    {
+        return $this->hasMany(respuesta::class, 'id_comentario', 'id');
+    }
 }

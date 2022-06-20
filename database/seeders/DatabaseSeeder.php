@@ -17,14 +17,32 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         \App\Models\tipo_usuario::create([
-            'nombre' => 'interno'
+            'nombre' => 'Usuario interno'
         ]);
+        \App\Models\tipo_usuario::create([
+            'nombre' => 'Usuario externo'
+        ]);
+
         \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'pablomarcial99@gmail.com',
+            'name' => 'Usuario interno',
+            'email' => 'interno@example.com',
             'password' => Hash::make('12345678'),
             'id_tipo_usuario' => 1
         ]);
-        \App\Models\nota::factory(10)->create();
+        \App\Models\User::factory()->create([
+            'name' => 'Otro usuario interno',
+            'email' => 'interno2@example.com',
+            'password' => Hash::make('12345678'),
+            'id_tipo_usuario' => 1
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Usuario externo',
+            'email' => 'externo@example.com',
+            'password' => Hash::make('12345678'),
+            'id_tipo_usuario' => 2
+        ]);
+
+        \App\Models\nota::factory(6)->create();
     }
 }

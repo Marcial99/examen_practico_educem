@@ -21,7 +21,7 @@ class NotaFactory extends Factory
     {
         return [
             'titulo' => $this->faker->text(60),
-            'contenido' => $this->faker->text(1500),
+            'contenido' => $this->faker->text(2500),
             'fecha' => now(),
             'imagen' => 'https://images.vexels.com/media/users/3/204881/isolated/lists/efdc3831d94459b2e871b227643512ee-icono-de-trazo-de-lapiz-de-notas.png',
             'id_user' => 1

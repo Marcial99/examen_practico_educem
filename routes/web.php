@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\NotasController;
+use App\Http\Controllers\RespuestaController;
 use App\Http\Controllers\TipoUsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::middleware([
@@ -30,4 +32,6 @@ Route::middleware([
 
     Route::resource('/tipo_usuario', TipoUsuarioController::class);
     Route::resource('/notas', NotasController::class);
+    Route::resource('/comentario', ComentarioController::class);
+    Route::resource('/respuesta', RespuestaController::class);
 });

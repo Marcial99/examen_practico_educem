@@ -15,4 +15,9 @@ class nota extends Model
         'imagen',
         'fecha'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'id_user');
+    }
 }

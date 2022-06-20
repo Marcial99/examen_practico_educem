@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\comentario;
-use App\Models\nota;
 use Illuminate\Http\Request;
 
-class NotasController extends Controller
+class ComentarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,6 @@ class NotasController extends Controller
      */
     public function index()
     {
-        $notas = nota::orderBy('fecha', 'desc')->paginate(6);
-        return view('pages.notas', compact('notas'));
         //
     }
 
@@ -28,10 +25,6 @@ class NotasController extends Controller
     public function create()
     {
         //
-        if (auth()->user()->tipo->id != 1) {
-            return back()->with('error', 'No tienes los privilegios para crear una nota');
-        }
-        return view('pages.crear_nota');
     }
 
     /**
@@ -43,18 +36,13 @@ class NotasController extends Controller
     public function store(Request $request)
     {
         //
-        if (auth()->user()->tipo->id != 1) {
-            return back()->with('error', 'No tienes los privilegios para crear una nota');
-        }
-        $imagen = $request->has('imagen') ? (is_null($request->imagen) ? 'https://images.vexels.com/media/users/3/204881/isolated/lists/efdc3831d94459b2e871b227643512ee-icono-de-trazo-de-lapiz-de-notas.png' : $request->imagen) : 'https://images.vexels.com/media/users/3/204881/isolated/lists/efdc3831d94459b2e871b227643512ee-icono-de-trazo-de-lapiz-de-notas.png';
-        nota::create([
-            'titulo' => $request->titulo,
-            'fecha' => now(),
-            'contenido' => $request->contenido,
-            'imagen' => $imagen,
-            'id_user' => auth()->user()->id
+        comentario::create([
+            'id_user' => auth()->user()->id,
+            'id_nota' => $request->id_nota,
+            'comentario' => $request->comentario,
+            'fecha' => now()
         ]);
-        return back()->with('success', 'Guardado correctamente');
+        return back()->with('success', 'Comentario guardado correctamente');
     }
 
     /**
@@ -66,9 +54,6 @@ class NotasController extends Controller
     public function show($id)
     {
         //
-        $nota = nota::find($id);
-        $comentarios = comentario::where('id_nota', $id)->get();
-        return view('pages.nota', compact('nota', 'comentarios'));
     }
 
     /**
